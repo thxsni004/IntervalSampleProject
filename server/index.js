@@ -2,10 +2,11 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-
+const mysql = require('mysql2');
 const app = express();
 const PORT = 5000;
 const SECRET_KEY = "absSecret";
+
 
 
 // Middleware
@@ -16,41 +17,53 @@ app.use(cors({
 app.use(express.json());
 
 //database
-const users = [];
+const db = mysql.createConnection({
+  host:'localhost',
+  user:'root',
+  password:'Thasnithanseer@004',
+  database:'jwt_auth'
+})
 
-// Register
+db.connect((err)=>{
+  if(err){
+    console.log('DB Connection faild',err.stack);
+    return;
+  }
+  console.log('connected to MySql database')
+});
+
 app.post('/api/register', async (req, res) => {
   const { username, password } = req.body;
 
-  const existingUser = users.find(u => u.username === username);
-  if (existingUser) return res.status(400).json({ message: 'User already exists' });
+  db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    if (results.length > 0) return res.status(400).json({ message: 'User already exists' });
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  users.push({ username, password: hashedPassword });
-
-  res.status(201).json({ message: 'Registered successfully' });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err) => {
+      if (err) return res.status(500).json({ error: 'Database error' });
+      res.status(201).json({ message: 'Registered successfully' });
+    });
+  });
 });
+
 
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
-  console.log("Received login for:", username);
 
-  const user = users.find(u => u.username === username);
-  if (!user) {
-    console.log("User not found");
-    return res.status(400).json({ error: 'Invalid credentials' });
-  }
+  db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    if (results.length === 0) return res.status(400).json({ error: 'Invalid credentials' });
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    console.log("Password not matched");
-    return res.status(400).json({ error: 'Invalid credentials' });
-  }
+    const user = results[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
-  const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
-  console.log("Login success");
-  res.json({ token, username });
+    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+    res.json({ token, username });
+  });
 });
+
 
 
 
@@ -67,6 +80,7 @@ app.get('/api/dashboard', (req, res) => {
     res.sendStatus(403);
   }
 });
+
 
 // Start Server
 app.listen(PORT, () => {

@@ -24,7 +24,7 @@ export default function SummarySection() {
       >
         Summary
       </Typography>
-      <Card sx={{ p: 2, mb: 2, position: "relative", boxShadow: 0 }}>
+      <Card sx={{ p: 2, mb: 2, position: "relative", boxShadow: 0, width: { xs: '100%', sm: '90%' }, }}>
         <Typography variant="subtitle2">Your Balance</Typography>
         <Typography variant="h5" fontWeight="bold">
           $10,632.00
