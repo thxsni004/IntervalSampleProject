@@ -129,6 +129,8 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import CategoryIcon from '@mui/icons-material/Category';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const drawerWidth = 240;
 
@@ -139,11 +141,11 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
 
   const content = (
     <Box sx={{ width: drawerWidth, p: 2 }}>
-      <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <img src="/logo.jpg" alt="Logo" style={{ width: 50, height: 50, borderRadius: 50 }} />
-        <Typography fontWeight="bold">O2O Brand Protector</Typography>
+      <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', gap: 2 ,mt:7,}}>
+        <img src="/logo.jpg" alt="Logo" style={{ width: 60, height: 60, borderRadius: 60 }} />
+        <Typography fontWeight="bold">O2O <br /> Brand <br />Protector</Typography>
       </Box>
-      <Divider />
+
       <List>
         {[
           { icon: <DashboardIcon />, text: 'Summary' },
@@ -168,8 +170,15 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
       open={mobileOpen}
       onClose={handleDrawerToggle}
       ModalProps={{ keepMounted: true }}
-      sx={{ '& .MuiDrawer-paper': { width: drawerWidth } }}
+      sx={{ '& .MuiDrawer-paper': { width: drawerWidth }  }}
     >
+      {/* close icon */}
+
+      <Box sx={{display:'flex',justifyContent:'flex-end',p:1}} >
+        <IconButton onClick={handleDrawerToggle}>
+          <CloseIcon/>
+        </IconButton>
+      </Box>
       {content}
     </Drawer>
   ) : (
