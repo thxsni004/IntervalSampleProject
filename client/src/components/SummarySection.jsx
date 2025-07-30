@@ -14,12 +14,13 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
 export default function SummarySection() {
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const isSmallMobile = useMediaQuery(theme.breakpoints.down("sm"));
   
   return (
+
       <Box
         sx={{
-          width: isMobile ? "90%" : 300,
+          width: isSmallMobile ? "100%" : 300,
           p: 2,
           backgroundColor: "#ffffff",
           borderRadius: 3,
@@ -117,6 +118,7 @@ export default function SummarySection() {
             </Card>
           </Grid>
         </Grid>
-      </Box>
+        </Box>
+      
   );
 }

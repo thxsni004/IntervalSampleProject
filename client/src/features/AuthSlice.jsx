@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { act } from 'react';
 
 const BASE_URL="http://localhost:5000";
 
@@ -23,21 +24,53 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     loading:false, //initially false 
-    user: {}, //empty object
+    user: JSON.parse(localStorage.getItem('user'))||{}, //empty object
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    logout:(state)=>{
+      state.user={};
+      state.status='idle';
+      state.loading=false;
+      localStorage.removeItem('user');
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state, action) => {
+      .addCase(login.pending, (state) => {
         state.loading = true;  //pending state 
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
           state.loading = false;
+          state.status='succeeded';
+          localStorage.setItem('user',JSON.stringify(action.payload));
+      })
+
+      .addCase(login.rejected,(state,action)=>{
+        state.loading=false;
+        state.status='failed';
+        state.error=action.error.message;
+      })
+
+      .addCase(registerUser.pending,(state)=>{
+        state.loading=true;
+      })
+
+      .addCase(registerUser.fulfilled,(state,action)=>{
+        state.user=action.payload;
+        state.loading=false;
+        state.status='succeeded';
+      })
+      .addCase(registerUser.rejected,(state,action)=>{
+        state.loading=false;
+        state.status='failed';
+        state.error=action.error.message;
       });
   },
 });
+
+export const {logout}=authSlice.actions;
 
 export default authSlice.reducer;

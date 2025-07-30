@@ -131,13 +131,31 @@ import CategoryIcon from '@mui/icons-material/Category';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import LogoutIcon from '@mui/icons-material/Logout';
+
+import { useDispatch } from "react-redux";
+import { logout } from "../features/AuthSlice";
 
 const drawerWidth = 240;
 
 function Sidebar({ mobileOpen, handleDrawerToggle }) {
 
   const navigate=useNavigate();
+  const  dispatch=useDispatch();
   const isMobile = useMediaQuery('(max-width:750px)');
+
+const handleItemClick=(item)=>{
+  if(item.text === 'Logout'){
+    const confirmLogout= window.confirm('are you sure you want to logout');
+    if(confirmLogout){
+      dispatch(logout());
+      navigate('/login')
+    }
+  }
+  else if(item.path){
+    navigate(item.path)
+  }
+}
 
   const content = (
     <Box sx={{ width: drawerWidth, p: 2 }}>
@@ -148,14 +166,15 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
 
       <List>
         {[
-          { icon: <DashboardIcon />, text: 'Summary' },
-          { icon: <ReceiptLongIcon />, text: 'Transaction' },
+          { icon: <DashboardIcon />, text: 'Home',path:'/dashboard' },
+          { icon: <ReceiptLongIcon />, text: 'Form',path:'/form' },
           { icon: <BarChartIcon />, text: 'Statistics' },
           { icon: <InventoryIcon />, text: 'Production' },
           { icon: <CategoryIcon />, text: 'Categories' },
           {icon:<AccountCircleIcon />,text:'User Details',path:'/user-details'},
+          {icon:<LogoutIcon/>,text:'Logout'},
         ].map((item, index) => (
-          <ListItemButton key={index} onClick={()=>navigate(item.path)}>
+          <ListItemButton key={index} onClick={()=>handleItemClick(item)}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItemButton>
