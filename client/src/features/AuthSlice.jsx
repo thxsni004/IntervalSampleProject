@@ -12,12 +12,19 @@ export const login = createAsyncThunk('auth/login', async ({ username, password 
   return response.data;
 });
 
-export const registerUser = createAsyncThunk('auth/register', async ({ username, password }) => {
-  const response = await axios.post(`${BASE_URL}/api/register`, {
+export const registerUser = createAsyncThunk('auth/register', async ({ username, password },{rejectWithValue}) => {
+  try{
+      const response = await axios.post(`${BASE_URL}/api/register`, {
     username,
     password,
   });
-  return response.data;
+    return response.data;
+
+  } catch(err){
+    return rejectWithValue(err.response.data.message||'registration failed')
+  }
+
+
 });
 
 const authSlice = createSlice({
