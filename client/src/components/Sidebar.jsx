@@ -52,7 +52,7 @@
 //       <Box sx={{  mb: 5,
 //        mt:5,
 //         display: 'flex',
-//         alignItems: 'center',
+//         alignI tems: 'center',
 //         gap: 2,
 //         }}>
 //         <img src="/logo.jpg" alt="Logo" style={{ width: 60, height: 60, borderRadius: 60 }} />
@@ -137,6 +137,7 @@
 
 // export default Sidebar;
 
+
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import {
@@ -174,11 +175,11 @@ const drawerWidth = 240;
 const collapsedWidth = 80;
 
 function Sidebar({ mobileOpen, handleDrawerToggle }) {
-  const theme = useTheme();
+  const theme = useTheme();  //to acess breakpoint and colors
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const sidebarOpen = useSelector((state) => state.sidebar.open);
+  const dispatch = useDispatch();  //dispatch redux actions 
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));  //true if screen <md
+  const sidebarOpen = useSelector((state) => state.sidebar.open);   //from redux
   const user = useSelector((state) => state.auth.user);
 
   const handleItemClick = (item) => {
@@ -197,7 +198,7 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
   const menuItems = [
     { icon: <DashboardIcon />, text: 'Dashboard', path: '/dashboard' },
     { icon: <ReceiptLongIcon />, text: 'Forms', path: '/form' },
-    { icon: <BarChartIcon />, text: 'Analytics', path: '/analytics' },
+    { icon: <BarChartIcon />, text: 'Temprature', path: '/weather' },
     // { icon: <AccountCircleIcon />, text: 'Profile', path: '/profile' },
      {icon:<AccountCircleIcon />,text:'User Details',path:'/user-details'},
   ];
@@ -341,7 +342,7 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
             justifyContent: sidebarOpen ? 'initial' : 'center',
             px: sidebarOpen ? 3 : 2.5,
           }}
-        >
+        > 
           <ListItemIcon
             sx={{
               minWidth: 0,

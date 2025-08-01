@@ -174,14 +174,14 @@ function UserDetails() {
         component="main"
         sx={{
           flexGrow: 1,
-          
+
           p: isSmallMobile ? 1 : 3,
           width: "100%",
           transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
           }),
-          marginLeft: sidebarOpen && !isMobile ? "240px" : 0,
+
         }}
       >
         {isMobile && (
@@ -193,8 +193,6 @@ function UserDetails() {
               left: 10,
               zIndex: theme.zIndex.drawer + 1,
               color: "black",
-
-    
             }}
           >
             <MenuIcon />
@@ -256,7 +254,6 @@ function UserDetails() {
             />
             <FormControl
               size="small"
-              
               sx={{
                 minWidth: isSmallMobile ? "100%" : 200,
                 "& .MuiOutlinedInput-root": {

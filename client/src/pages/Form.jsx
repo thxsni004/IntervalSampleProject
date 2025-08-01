@@ -67,6 +67,8 @@ function FormikMaterialForm() {
         handleDrawerToggle={() => dispatch(toggleSidebar())}
       />
 
+      
+
       <Box
         component="main"
         sx={{
@@ -77,7 +79,7 @@ function FormikMaterialForm() {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
           }),
-          marginLeft: sidebarOpen && !isMobile ? "240px" : 0,
+          // marginLeft: sidebarOpen && !isMobile ? "240px" : 0,
         }}
       >
         {isMobile && (
@@ -248,9 +250,11 @@ function FormikMaterialForm() {
                     Submit
                   </Button>
                 </Box>
+                
               </Form>
             )}
           </Formik>
+          
 
           {/* Submit Popup */}
 
@@ -294,6 +298,8 @@ function FormikMaterialForm() {
         </LocalizationProvider>
       </Box>
     </Box>
+    
+    
   );
 }
 
