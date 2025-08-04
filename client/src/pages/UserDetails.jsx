@@ -20,8 +20,8 @@ import { Typography, useMediaQuery } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addUser, updateUser, deleteUser } from "../features/userSlice"; // adjust path if needed
-import { toggleSidebar } from "../features/sidebarSlice";
+import { addUser, updateUser, deleteUser } from "../redux/features/userSlice"; // adjust path if needed
+import { toggleSidebar } from "../redux/features/sidebarSlice";
 
 function UserDetails() {
   const theme = useTheme();
@@ -181,7 +181,6 @@ function UserDetails() {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
           }),
-
         }}
       >
         {isMobile && (

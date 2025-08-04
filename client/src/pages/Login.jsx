@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../features/AuthSlice';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { 
-  TextField, 
-  Button, 
-  Box, 
-  Typography, 
-  Link, 
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/features/AuthSlice";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Link,
   CircularProgress,
   Paper,
   Fade,
-  Alert
-} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+  Alert,
+} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // Custom theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#3f51b5',
+      main: "#3f51b5",
     },
     secondary: {
-      main: '#f50057',
+      main: "#f50057",
     },
   },
 });
@@ -31,29 +30,33 @@ const theme = createTheme({
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  
-  const { loading, status, error: authError } = useSelector(state => state.auth);
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const {
+    loading,
+    status,
+    error: authError,
+  } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     if (!username || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
-    
+
     const result = await dispatch(login({ username, password }));
-    if (result.meta.requestStatus === 'fulfilled') {
-      navigate('/dashboard');
+    if (result.meta.requestStatus === "fulfilled") {
+      navigate("/dashboard");
     }
   };
 
   useEffect(() => {
     if (authError) {
-      setError('Invalid username or password');
+      setError("Invalid username or password");
     }
   }, [authError]);
 
@@ -61,11 +64,11 @@ function Login() {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          background: 'linear-gradient(135deg, #f5e5f3ff 0%, #e3adeeff 100%)',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          background: "linear-gradient(135deg, #f5e5f3ff 0%, #e3adeeff 100%)",
           padding: 2,
         }}
       >
@@ -73,11 +76,11 @@ function Login() {
           <Paper
             elevation={6}
             sx={{
-              width: '100%',
+              width: "100%",
               maxWidth: 400,
               padding: 4,
               borderRadius: 3,
-              backgroundColor: 'background.paper',
+              backgroundColor: "background.paper",
             }}
           >
             <Box
@@ -86,28 +89,28 @@ function Login() {
               noValidate
               autoComplete="off"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
+                display: "flex",
+                flexDirection: "column",
                 gap: 2,
               }}
             >
-              <Typography 
-                variant="h4" 
-                component="h1" 
+              <Typography
+                variant="h4"
+                component="h1"
                 gutterBottom
                 sx={{
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                  color: 'purple',
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  color: "purple",
                 }}
               >
                 Welcome Back
               </Typography>
-              
-              <Typography 
-                variant="body2" 
+
+              <Typography
+                variant="body2"
                 color="text.secondary"
-                sx={{ textAlign: 'center', mb: 3 }}
+                sx={{ textAlign: "center", mb: 3 }}
               >
                 Please sign in to continue
               </Typography>
@@ -126,7 +129,7 @@ function Login() {
                 onChange={(e) => setUserName(e.target.value)}
                 sx={{ mb: 2 }}
                 InputProps={{
-                  sx: { borderRadius: 2 }
+                  sx: { borderRadius: 2 },
                 }}
               />
 
@@ -139,7 +142,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 sx={{ mb: 2 }}
                 InputProps={{
-                  sx: { borderRadius: 2 }
+                  sx: { borderRadius: 2 },
                 }}
               />
 
@@ -152,35 +155,35 @@ function Login() {
                   mt: 2,
                   py: 1.5,
                   borderRadius: 2,
-                  textTransform: 'none',
-                  fontSize: '1rem',
+                  textTransform: "none",
+                  fontSize: "1rem",
                 }}
               >
                 {loading ? (
                   <CircularProgress size={24} color="inherit" />
                 ) : (
-                  'Sign In'
+                  "Sign In"
                 )}
               </Button>
 
-              <Typography 
-                variant="body2" 
-                sx={{ 
-                  textAlign: 'center', 
+              <Typography
+                variant="body2"
+                sx={{
+                  textAlign: "center",
                   mt: 2,
-                  color: 'text.secondary'
+                  color: "text.secondary",
                 }}
               >
-                Don't have an account?{' '}
-                <Link 
-                  component={RouterLink} 
+                Don't have an account?{" "}
+                <Link
+                  component={RouterLink}
                   to="/register"
-                  sx={{ 
-                    fontWeight: 'bold',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      textDecoration: 'underline'
-                    }
+                  sx={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
                   }}
                 >
                   Sign Up

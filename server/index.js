@@ -1,11 +1,18 @@
+const dotenv =require ('dotenv');
+dotenv.config();
+
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const mysql = require('mysql2');
+
 const app = express();
-const PORT = 5000;
-const SECRET_KEY = "absSecret";
+
+const PORT = process.env.PORT||5000;
+const SECRET_KEY = process.env.SECRET_KEY;
+
+
 
 
 
@@ -18,11 +25,11 @@ app.use(express.json());
 
 //database
 const db = mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:'Thasnithanseer@004',
-  database:'jwt_auth'
-})
+  host:process.env.DB_HOST,
+  user:process.env.DB_USER,
+  password:process.env.DB_PASSWORD,
+  database:process.env.DB_NAME,
+});
 
 db.connect((err)=>{
   if(err){
@@ -47,7 +54,6 @@ app.post('/api/register', async (req, res) => {
   });
 });
 
-
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -59,7 +65,7 @@ app.post('/api/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'incorrect password ' });
 
-    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token, username });
   });
 });

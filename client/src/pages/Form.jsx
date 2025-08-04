@@ -21,7 +21,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebar } from "../features/sidebarSlice";
+import { toggleSidebar } from "../redux/features/sidebarSlice";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -29,7 +29,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { addSubmission } from "../features/formSlice";
+import { addSubmission } from "../redux/features/formSlice";
 
 const educationOptions = [
   "High School",
@@ -39,14 +39,17 @@ const educationOptions = [
 ];
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  address: Yup.string().required("Required"),
-  education: Yup.string().required("Required"),
+  name: Yup.string().required("please enter your name"),
+  email: Yup.string().email("Invalid email").required("enter valid email"),
+  address: Yup.string().required("Enter you'r Adrress"),
+  education: Yup.string().required("select Your Qualification"),
   phone: Yup.string()
     .matches(/^\d{10}$/, "Phone number must be 10 digits")
-    .required("Required"),
-  dob: Yup.date().required("Required"),
+    .required("enter Phone number"),
+  dob: Yup.date()
+    .nullable()
+    .typeError("Date of Birth is required")
+    .required("Date of Birth is required"),
   gender: Yup.array().min(1, "Select at least one gender"),
 });
 
@@ -66,8 +69,6 @@ function FormikMaterialForm() {
         mobileOpen={sidebarOpen}
         handleDrawerToggle={() => dispatch(toggleSidebar())}
       />
-
-      
 
       <Box
         component="main"
@@ -204,7 +205,7 @@ function FormikMaterialForm() {
                   <DatePicker
                     label="Date of Birth"
                     value={values.dob}
-                    onChange={(value) => setFieldValue("dob", value)}
+                    onChange={(value) => setFieldValue("dob", value ?? null)}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -250,16 +251,22 @@ function FormikMaterialForm() {
                     Submit
                   </Button>
                 </Box>
-                
               </Form>
             )}
           </Formik>
-          
 
           {/* Submit Popup */}
 
           <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-            <DialogTitle sx={{textAlign:'center',fontWeight:'bold',fontFamily:'Times new roman'}}>Form Submitted</DialogTitle>
+            <DialogTitle
+              sx={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontFamily: "Times new roman",
+              }}
+            >
+              Form Submitted
+            </DialogTitle>
             <DialogContent>
               <Typography variant="body1">
                 Your form has been submitted successfully.
@@ -269,23 +276,22 @@ function FormikMaterialForm() {
                   <Typography variant="subtitle2">
                     Submitted Details:
                   </Typography>
-                  {Object.entries(submittedData).map(([key,value])=>(
+                  {Object.entries(submittedData).map(([key, value]) => (
                     <ul key={key}>
                       <Typography variant="body2">
-                        <strong>{key.charAt(0).toUpperCase()+key.slice(1)}:</strong>{" "}
+                        <strong>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}:
+                        </strong>{" "}
                         {
                           Array.isArray(value) //checkbox
-                          ?value.join(",")
-                          :value instanceof Date //date object convert into  readable
-                          ?value.toLocaleDateString() //gives something  like "7/31/2025"
-                          :value //render the value normally
+                            ? value.join(",")
+                            : value instanceof Date //date object convert into  readable
+                            ? value.toLocaleDateString() //gives something  like "7/31/2025"
+                            : value //render the value normally
                         }
-
                       </Typography>
-
                     </ul>
                   ))}
-                  
                 </Box>
               )}
             </DialogContent>
@@ -298,8 +304,6 @@ function FormikMaterialForm() {
         </LocalizationProvider>
       </Box>
     </Box>
-    
-    
   );
 }
 
