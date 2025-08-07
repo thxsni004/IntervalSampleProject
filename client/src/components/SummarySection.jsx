@@ -92,6 +92,7 @@ export default function SummarySection() {
 
         <Grid container spacing={2}>
           <Grid item xs={6}>
+            <a href="/drag" style={{textDecoration:"none"}}>
             <Card sx={{ p: 2, borderRadius: 3 ,backgroundColor:'lightyellow'}}>
               <Stack direction="column" alignItems="center">
                 <Avatar sx={{ bgcolor: "rgba(255, 255, 0, 0.2)" }}>
@@ -103,6 +104,7 @@ export default function SummarySection() {
                 <Typography variant="caption">18,941 units</Typography>
               </Stack>
             </Card>
+            </a>
           </Grid>
           <Grid item xs={6}>
             <Card sx={{ p: 2, borderRadius: 3 ,backgroundColor:'#d7f5d3'}}>

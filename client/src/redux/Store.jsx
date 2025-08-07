@@ -5,6 +5,9 @@ import userReducer from "./features/userSlice";
 import sidebarReducer from "./features/sidebarSlice";
 import formReducer from "./features/formSlice";
 import weatherReducer from "./features/watherSlice";
+import uploadReducer from "./features/UploadSlice"
+
+
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +17,8 @@ export const store = configureStore({
     sidebar: sidebarReducer,
     form: formReducer,
     weather: weatherReducer,
+      upload: uploadReducer
+      
+ 
   },
 });

@@ -6,8 +6,11 @@ import Dashboard from './pages/Dashboard';
 import UserDetails from './pages/UserDetails';
 import Form from './pages/Form';
 import ProtectedRoute from './components/ProtectedRote';
-import { Analytics } from '@mui/icons-material';
+
 import WeatherPage from './pages/WeatherPage';
+import FileUpload from './components/FileUpload';
+import Dynamic from './pages/Dynamic';
+import DragDrop from './pages/DragDrop'
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -23,6 +26,10 @@ function App() {
 <Route path="/user-details" element={<UserDetails/>} />
 <Route path='/form' element={<Form/>}/>
 <Route path='/weather' element={<WeatherPage/>}/>
+
+<Route path='/upload' element={<FileUpload/>}/>
+<Route path='/slot' element={<Dynamic/>}/>
+<Route path='drag' element={<DragDrop/>} />
 
       </Routes>
     </BrowserRouter>

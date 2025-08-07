@@ -1,11 +1,14 @@
-const dotenv =require ('dotenv');
-dotenv.config();
-
 const express = require('express');
+
+const multer = require('multer');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const mysql = require('mysql2');
+
+const dotenv = require ('dotenv');
+dotenv.config();
 
 const app = express();
 
@@ -13,15 +16,29 @@ const PORT = process.env.PORT||5000;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 
-
-
-
-// Middleware
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 }));
+
 app.use(express.json());
+
+// Serve static files from the 'uploads' folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+// Set up multer storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, 'uploads'));
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+
 
 //database
 const db = mysql.createConnection({
@@ -87,8 +104,25 @@ app.get('/api/dashboard', (req, res) => {
   }
 });
 
+// // Upload endpoint
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const fileUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`;
+    res.status(200).json({ message: 'File uploaded successfully', fileUrl });
+  } catch (error) {
+    console.error('Upload failed:', error);
+    res.status(500).json({ message: 'Upload failed' });
+  }
+});
+
+
 
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+   console.log('Upload directory:', path.join(__dirname, 'uploads'));
 });

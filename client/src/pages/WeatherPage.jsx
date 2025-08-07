@@ -21,6 +21,7 @@ import { toggleSidebar } from "../redux/features/sidebarSlice";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 
+
 const WeatherPage = () => {
   const [city, setCity] = useState("");
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const WeatherPage = () => {
     }
   };
   console.log(data);
+  
 
   const sidebarOpen = useSelector((state) => state.sidebar.open);
   const theme = useTheme();
@@ -121,7 +123,9 @@ const WeatherPage = () => {
           </Box>
         </Container>
       </Box>
+
     </Box>
+    
   );
 };
 

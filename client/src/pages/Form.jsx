@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -30,6 +30,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { addSubmission } from "../redux/features/formSlice";
+import FileUpload from "../components/FileUpload";
 
 const educationOptions = [
   "High School",
@@ -51,6 +52,23 @@ const validationSchema = Yup.object().shape({
     .typeError("Date of Birth is required")
     .required("Date of Birth is required"),
   gender: Yup.array().min(1, "Select at least one gender"),
+
+  file: Yup.mixed()
+    .required("File is required")
+    .test(
+      "fileSize",
+      "File too large (Max 2MB)",
+      (value) => !value || value.size <= 2 * 1024 * 1024
+    )
+    .test(
+      "fileType",
+      "Unsupported Format (JPEG, PNG, GIF, PDF only)",
+      (value) =>
+        !value ||
+        ["image/jpeg", "image/png", "image/gif", "application/pdf"].includes(
+          value.type
+        )
+    ),
 });
 
 function FormikMaterialForm() {
@@ -62,6 +80,9 @@ function FormikMaterialForm() {
 
   const [openDialog, setOpenDialog] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
+  useEffect(() => {
+    console.log("Dialog open:", openDialog);
+  }, [openDialog]);
 
   return (
     <Box display="flex">
@@ -108,11 +129,26 @@ function FormikMaterialForm() {
               phone: "",
               dob: null,
               gender: [],
+              file: null,
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { resetForm }) => {
-              dispatch(addSubmission(values));
-              setSubmittedData(values);
+              console.log("Form submitted with:", values);
+
+              const safeValues = {
+                ...values,
+                dob: values.dob ? values.dob.toISOString() : null,
+                file: values.file
+                  ? {
+                      name: values.file.name,
+                      size: values.file.size,
+                      type: values.file.type,
+                    }
+                  : null,
+              };
+
+              dispatch(addSubmission(safeValues));
+              setSubmittedData(safeValues);
               setOpenDialog(true);
               resetForm();
             }}
@@ -218,6 +254,13 @@ function FormikMaterialForm() {
                     )}
                   />
 
+                  <FileUpload
+                    value={values.file}
+                    onChange={(file) => setFieldValue("file", file)}
+                    onBlur={() => setFieldValue("file", values.file)}
+                    error={touched.file && errors.file}
+                  />
+
                   <FormGroup>
                     <Typography>Gender</Typography>
                     {["Male", "Female", "Other"].map((gender) => (
@@ -257,7 +300,13 @@ function FormikMaterialForm() {
 
           {/* Submit Popup */}
 
-          <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+          <Dialog
+            open={openDialog}
+            onClose={() => setOpenDialog(false)}
+            fullWidth
+            maxWidth="sm"
+            sx={{ zIndex: 9999 }}
+          >
             <DialogTitle
               sx={{
                 textAlign: "center",
@@ -276,22 +325,36 @@ function FormikMaterialForm() {
                   <Typography variant="subtitle2">
                     Submitted Details:
                   </Typography>
-                  {Object.entries(submittedData).map(([key, value]) => (
-                    <ul key={key}>
-                      <Typography variant="body2">
-                        <strong>
-                          {key.charAt(0).toUpperCase() + key.slice(1)}:
-                        </strong>{" "}
-                        {
-                          Array.isArray(value) //checkbox
-                            ? value.join(",")
-                            : value instanceof Date //date object convert into  readable
-                            ? value.toLocaleDateString() //gives something  like "7/31/2025"
-                            : value //render the value normally
-                        }
-                      </Typography>
-                    </ul>
-                  ))}
+                  {Object.entries(submittedData).map(([key, value]) => {
+                    let displayValue;
+
+                    if (Array.isArray(value)) {
+                      displayValue = value.join(", ");
+                    } else if (value instanceof Date) {
+                      displayValue = value.toLocaleDateString();
+                    } else if (key === "dob" && typeof value === "string") {
+                      displayValue = new Date(value).toLocaleDateString();
+                    } else if (
+                      key === "file" &&
+                      value &&
+                      typeof value === "object"
+                    ) {
+                      displayValue = value.name; // get file name
+                    } else {
+                      displayValue = value;
+                    }
+
+                    return (
+                      <Box key={key} mt={1}>
+                        <Typography variant="body2">
+                          <strong>
+                            {key.charAt(0).toUpperCase() + key.slice(1)}:
+                          </strong>{" "}
+                          {displayValue}
+                        </Typography>
+                      </Box>
+                    );
+                  })}
                 </Box>
               )}
             </DialogContent>

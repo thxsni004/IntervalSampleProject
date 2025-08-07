@@ -21,11 +21,13 @@ import {
   BarChart as BarChartIcon,
   Inventory as InventoryIcon,
   Category as CategoryIcon,
+  Upload as UploadIcon,
   AccountCircle as AccountCircleIcon,
   Logout as LogoutIcon,
   Close as CloseIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
+  FileUpload,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/features/AuthSlice";
@@ -65,6 +67,9 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
       text: "User Details",
       path: "/user-details",
     },
+    {icon:<InventoryIcon/>, text:"Referral", path:"/slot"}
+   
+    //  {icon: <UploadIcon/>,text:"file Upload",path:"/upload",}
   ];
 
   const SidebarContent = (
