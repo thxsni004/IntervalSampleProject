@@ -6,6 +6,7 @@ import sidebarReducer from "./features/sidebarSlice";
 import formReducer from "./features/formSlice";
 import weatherReducer from "./features/watherSlice";
 import uploadReducer from "./features/UploadSlice"
+import dragDropReducer from './features/dragDropSlice'
 
 
 
@@ -17,7 +18,8 @@ export const store = configureStore({
     sidebar: sidebarReducer,
     form: formReducer,
     weather: weatherReducer,
-      upload: uploadReducer
+      upload: uploadReducer,
+      dragDrop:dragDropReducer,
       
  
   },

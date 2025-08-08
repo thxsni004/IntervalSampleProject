@@ -48,9 +48,7 @@ const validationSchema = Yup.object().shape({
     .matches(/^\d{10}$/, "Phone number must be 10 digits")
     .required("enter Phone number"),
   dob: Yup.date()
-    .nullable()
-    .typeError("Date of Birth is required")
-    .required("Date of Birth is required"),
+  .required("Date of Birth is required"),
   gender: Yup.array().min(1, "Select at least one gender"),
 
   file: Yup.mixed()
@@ -242,16 +240,15 @@ function FormikMaterialForm() {
                     label="Date of Birth"
                     value={values.dob}
                     onChange={(value) => setFieldValue("dob", value ?? null)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        name="dob"
-                        onBlur={handleBlur}
-                        error={touched.dob && Boolean(errors.dob)}
-                        helperText={touched.dob && errors.dob}
-                        fullWidth
-                      />
-                    )}
+                    slotProps={{
+                      textField: {
+                        fullWidth: true,
+                        margin: "normal",
+                        size: "small", // ✅ Correct string value
+                        error: touched.dob && Boolean(errors.dob),
+                        helperText: touched.dob && errors.dob,
+                      },
+                    }}
                   />
 
                   <FileUpload

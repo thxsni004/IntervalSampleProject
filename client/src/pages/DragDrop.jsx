@@ -13,18 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from '../components/Sidebar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { toggleSidebar } from '../redux/features/sidebarSlice';
+import { moveItem } from '../redux/features/dragDropSlice';
 
-const initialData = {
-  card_A: ['Item 1', 'Item 2'],
-  card_B: ['Item 3'],
-};
+
 
 const DragDrop = () => {
-  const [data, setData] = useState(initialData);
+ 
   const dispatch = useDispatch();
   const sidebarOpen = useSelector((state) => state.sidebar.open);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const data=useSelector((state)=>state.dragDrop);
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -35,18 +35,17 @@ const DragDrop = () => {
     )
       return;
 
-    const sourceItems = Array.from(data[source.droppableId]);
-    const destItems = Array.from(data[destination.droppableId]);
-    const [movedItem] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, movedItem);
+      dispatch(moveItem({source,destination}));
 
-    setData((prev) => ({
-      ...prev,
-      [source.droppableId]: sourceItems,
-      [destination.droppableId]: destItems,
-    }));
   };
 
+  const cardConfig=[
+    {id:'card_A' , title:'To-Do'},
+    {id:'card_B' , title:'Work In Progress'},
+    {id:'card_C' , title:'Completed'},
+  ];
+
+  
   return (
     <Box display="flex" minHeight="100vh">
       <Sidebar
@@ -83,7 +82,7 @@ const DragDrop = () => {
           gutterBottom
           sx={{ textAlign: 'center', mb: 4 }}
         >
-          Drag & Drop Task Manager
+          Task Board
         </Typography>
 
         <DragDropContext onDragEnd={onDragEnd}>
@@ -95,9 +94,10 @@ const DragDrop = () => {
               flexWrap: 'wrap',
             }}
           >
-            {['card_A', 'card_B'].map((cardid) => (
-              <Droppable droppableId={cardid} key={cardid}>
+            {cardConfig.map((card) => (
+              <Droppable droppableId={card.id} key={card.id} isDropDisabled={false} >
                 {(provided, snapshot) => (
+                  
                   <Paper
                     ref={provided.innerRef}
                     {...provided.droppableProps}
@@ -126,12 +126,13 @@ const DragDrop = () => {
                         textTransform: 'uppercase',
                       }}
                     >
-                      {cardid.replace('card_', 'Card ')}
+                      {card.title}
                     </Typography>
 
-                    {data[cardid].map((item, index) => (
+                    {data[card.id]?.map((item, index) => (
                       <Draggable draggableId={item} index={index} key={item}>
                         {(provided, snapshot) => (
+
                           <Paper
                             ref={provided.innerRef}
                             {...provided.draggableProps}
@@ -146,7 +147,6 @@ const DragDrop = () => {
                               boxShadow: snapshot.isDragging
                                 ? '0 4px 8px rgba(0,0,0,0.2)'
                                 : '0 1px 3px rgba(0,0,0,0.1)',
-                              transition: 'background-color 0.2s ease',
                               cursor: 'grab',
                               '&:hover': {
                                 backgroundColor: '#ebc6ebff',
@@ -157,6 +157,7 @@ const DragDrop = () => {
                               {item}
                             </Typography>
                           </Paper>
+                       
                         )}
                       </Draggable>
                     ))}

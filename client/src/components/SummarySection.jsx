@@ -99,7 +99,7 @@ export default function SummarySection() {
                   <StoreMallDirectoryIcon />
                 </Avatar>
                 <Typography fontWeight="bold" sx={{ mt: 1 }}>
-                  Footwear
+                  DropDrag
                 </Typography>
                 <Typography variant="caption">18,941 units</Typography>
               </Stack>
