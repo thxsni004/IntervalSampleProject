@@ -244,7 +244,7 @@ function FormikMaterialForm() {
                       textField: {
                         fullWidth: true,
                         margin: "normal",
-                        size: "small", // ✅ Correct string value
+                        size: "normal", 
                         error: touched.dob && Boolean(errors.dob),
                         helperText: touched.dob && errors.dob,
                       },

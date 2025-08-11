@@ -151,6 +151,7 @@ const DragDrop = () => {
                               '&:hover': {
                                 backgroundColor: '#ebc6ebff',
                               },
+                              
                             }}
                           >
                             <Typography variant="body1" fontWeight={500}>
