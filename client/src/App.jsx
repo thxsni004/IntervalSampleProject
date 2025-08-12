@@ -12,6 +12,10 @@ import FileUpload from './components/FileUpload';
 import Dynamic from './pages/Dynamic';
 import DragDrop from './pages/DragDrop'
 
+import ProductCart from './pages/ProductCart';
+import CartPage from './pages/CartPage';
+import Purchased from './pages/Purchased';
+
 function App() {
   const user = useSelector((state) => state.auth.user);
 
@@ -29,7 +33,10 @@ function App() {
 
 <Route path='/upload' element={<FileUpload/>}/>
 <Route path='/slot' element={<Dynamic/>}/>
-<Route path='drag' element={<DragDrop/>} />
+<Route path='/drag' element={<DragDrop/>} />
+<Route path='/product' element={<ProductCart/>}/>
+<Route path='/cartpage' element={<CartPage/>}/>
+<Route path="/purchased" element={<Purchased />} />
 
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Smartphone X10",
+    "image": "https://www.sammobile.com/wp-content/uploads/2023/01/Galaxy-A14-5G-14.jpg",
+    "available":5,
+    "rating":4.5
+  },
+  {
+    "id": 2,
+    "title": "Wireless Headphones Z",
+    "image": "https://www.sammobile.com/wp-content/uploads/2023/01/Galaxy-A14-5G-14.jpg",
+    "available":2,
+    "rating":4.2
+  },
+  {
+    "id": 3,
+    "title": "iGaming Laptop Pro",
+    "image": "https://www.sammobile.com/wp-content/uploads/2023/01/Galaxy-A14-5G-14.jpg",
+    "available":0,
+    "rating":4.8
+  },
+    {
+    "id": 4,
+    "title": "Smartwatch Gen 5",
+    "image": "https://www.sammobile.com/wp-content/uploads/2023/01/Galaxy-A14-5G-14.jpg",
+    "available":3,
+    "rating":4.0
+  }
+  
+
+]

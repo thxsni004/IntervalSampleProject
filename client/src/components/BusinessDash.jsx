@@ -28,6 +28,8 @@ import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import SummarySection from "./SummarySection";
+import Header from "./Header";
+import ProductList from "./productList/ProductList";
 
 function BusinessDash() {
   const theme = useTheme();
@@ -73,7 +75,7 @@ function BusinessDash() {
         }}
       >
         {/* AppBar Section */}
-        <AppBar
+        {/* <AppBar
           position="static"
           sx={{
             backgroundColor: "#e7ddee",
@@ -118,7 +120,8 @@ function BusinessDash() {
               </IconButton>
             </Box>
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
+        <Header />
 
         {/* Stats Cards Section */}
         <Grid
@@ -174,6 +177,7 @@ function BusinessDash() {
             </Grid>
           ))}
         </Grid>
+        {/* <ProductList/> */}
 
         <Typography
           noWrap
