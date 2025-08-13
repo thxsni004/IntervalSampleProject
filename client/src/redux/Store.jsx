@@ -24,4 +24,19 @@ export const store = configureStore({
       
  
   },
+  
+});
+// Save state to localStorage
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('reduxState', serializedState);
+  } catch {
+    // ignore errors
+  }
+};
+
+// Subscribe to store changes to save the state
+store.subscribe(() => {
+  saveState(store.getState());
 });

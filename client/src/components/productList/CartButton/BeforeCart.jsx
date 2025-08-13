@@ -11,6 +11,7 @@ const BeforCart = ({product}) => {
    <Box className='before-cart' > 
     <Button className='add-cart-button '
     disabled={product.available === 0}
+    
 
     
     onClick={()=>dispatch(addToCart(product))} >
