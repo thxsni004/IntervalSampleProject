@@ -106,7 +106,7 @@ import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux';
 import CartButtons from './CartButton/CartButton';
 import './ProductList.css';
-import { buyProduct } from '../../redux/features/Cart';
+import { buyProduct } from '../../redux/features/CartSlice';
 import BuyNowDialog from '../BuyNowDialog';
 
 const ProductList = () => {

@@ -4,7 +4,7 @@ import { Box, Typography, Button, Divider, IconButton,
   useTheme,
   useMediaQuery, } from '@mui/material';
 
-import { buyProducts } from '../redux/features/Cart';
+import { buyProducts } from '../redux/features/CartSlice';
 import { useNavigate } from 'react-router-dom';
 
 import Sidebar from '../components/Sidebar';
@@ -90,10 +90,16 @@ const CartPage = () => {
  
 
       {cartList.length === 0 ? (
+          <Box sx={{ textAlign: "center" }}>
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-10681467-8593283.png"
+      alt="Empty Cart"
+      style={{ maxWidth: "300px", width: "100%",margin:90 }}
+    />
         <Typography variant="h6" sx={{ color: '#3b273d',fontFamily:"times new roman" ,fontWeight:"bold",textAlign:"center",justifyContent:"center" }}>
           Your cart is empty
         </Typography>
-
+</Box>
         
       ) : (
         <>

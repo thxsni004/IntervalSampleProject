@@ -16,13 +16,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({title}) => {
   const theme = useTheme();
   const isSmallMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     // Get cart from Redux
 const {cartList} = useSelector((state)=>state.cart);
 const totalCartCount=cartList.reduce((total,item)=>total+item.count,0)
+ 
 
   return (
     <Box
@@ -64,7 +65,7 @@ const totalCartCount=cartList.reduce((total,item)=>total+item.count,0)
               fontWeight: "600",
             }}
           >
-            Business Dashboard
+            {title}
           </Typography>
 
           {/* Icons Section */}

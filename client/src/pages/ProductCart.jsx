@@ -83,7 +83,7 @@ const ProductCart = () => {
                     width: '100%',
                     position: 'relative',
                     backgroundColor: '#e7ddee',
-                    marginLeft: isMobile ? 0 : sidebarOpen ? '240px' : '0',
+                    // marginLeft: isMobile ? 0 : sidebarOpen ? '240px' : '0',
                     transition: theme.transitions.create('margin', {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
@@ -99,7 +99,7 @@ const ProductCart = () => {
                             left: 10,
                             zIndex: theme.zIndex.drawer + 1,
                             color: 'black',
-                            backgroundColor: 'rgba(255,255,255,0.7)',
+                            // backgroundColor: 'rgba(255,255,255,0.7)',
                             '&:hover': {
                                 backgroundColor: 'rgba(255,255,255,0.9)',
                             }
@@ -108,7 +108,7 @@ const ProductCart = () => {
                         <MenuIcon />
                     </IconButton>
                 )}
-                <Header />
+                <Header title="Accessories" />
                 <ProductList />
             </Box>
         </Box>

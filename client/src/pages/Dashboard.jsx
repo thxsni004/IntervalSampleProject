@@ -6,6 +6,8 @@ import Sidebar from "../components/Sidebar";
 import BusinessDash from "../components/BusinessDash";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
+// import { Button } from "@mui/material";
+// import ShiftDialog from "../components/ShiftDialog";
 
 import { toggleSidebar } from "../redux/features/sidebarSlice";
 
@@ -19,6 +21,7 @@ function Dashboard() {
     dispatch(toggleSidebar());
   };
 
+  const [open, setOpen] = useState(false);
   return (
     <Box sx={{ display: "flex" }}>
       <Sidebar
@@ -41,6 +44,12 @@ function Dashboard() {
         <BusinessDash />
         {/* <SummarySection /> */}
       </Box>
+         {/* <>
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        Open Dialog
+      </Button>
+      <ShiftDialog open={open} onClose={() => setOpen(false)} />
+    </> */}
     </Box>
   );
 }

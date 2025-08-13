@@ -32,6 +32,8 @@ import * as Yup from "yup";
 import { addSubmission } from "../redux/features/formSlice";
 import FileUpload from "../components/FileUpload";
 
+
+
 const educationOptions = [
   "High School",
   "Diploma",

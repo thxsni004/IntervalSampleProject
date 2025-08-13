@@ -15,6 +15,8 @@ import DragDrop from './pages/DragDrop'
 import ProductCart from './pages/ProductCart';
 import CartPage from './pages/CartPage';
 import Purchased from './pages/Purchased';
+// import GlobalDialog from './components/GlobalDialog';
+import Parent from './components/Parent';
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -37,7 +39,7 @@ function App() {
 <Route path='/product' element={<ProductCart/>}/>
 <Route path='/cartpage' element={<CartPage/>}/>
 <Route path="/purchased" element={<Purchased />} />
-
+<Route path="/parent" element={<Parent />} />
       </Routes>
     </BrowserRouter>
   );

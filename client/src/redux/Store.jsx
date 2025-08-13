@@ -7,7 +7,7 @@ import formReducer from "./features/formSlice";
 import weatherReducer from "./features/watherSlice";
 import uploadReducer from "./features/UploadSlice"
 import dragDropReducer from './features/dragDropSlice'
-import cartReducer from './features/Cart'
+import cartReducer from './features/CartSlice'
 
 
 export const store = configureStore({

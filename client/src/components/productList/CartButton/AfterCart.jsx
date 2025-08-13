@@ -2,7 +2,7 @@ import { Box, Button } from '@mui/material'
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
-import {  decrement, increment } from '../../../redux/features/Cart';
+import {  decrement, increment } from '../../../redux/features/CartSlice';
 import './CartButton.css'
 
 const AfterCart = ({cartCount,productID}) => {

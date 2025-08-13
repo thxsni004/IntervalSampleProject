@@ -2,7 +2,7 @@ import { Button,Box } from '@mui/material'
 import React from 'react'
 import './CartButton.css'
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/features/Cart';
+import { addToCart } from '../../../redux/features/CartSlice';
 
 const BeforCart = ({product}) => {
   

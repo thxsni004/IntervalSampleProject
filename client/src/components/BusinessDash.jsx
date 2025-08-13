@@ -121,7 +121,7 @@ function BusinessDash() {
             </Box>
           </Toolbar>
         </AppBar> */}
-        <Header />
+        <Header title= "Business Dashboard"/>
 
         {/* Stats Cards Section */}
         <Grid
