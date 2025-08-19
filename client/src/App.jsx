@@ -17,6 +17,8 @@ import CartPage from './pages/CartPage';
 import Purchased from './pages/Purchased';
 // import GlobalDialog from './components/GlobalDialog';
 import Parent from './components/Parent';
+import ReactWindow from './pages/ReactWindow';
+import MultiStepForm from './pages/MultiStepForm';
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -40,6 +42,8 @@ function App() {
 <Route path='/cartpage' element={<CartPage/>}/>
 <Route path="/purchased" element={<Purchased />} />
 <Route path="/parent" element={<Parent />} />
+<Route path="/react" element={<ReactWindow />} />
+<Route path='multi' element={<MultiStepForm/>}/>
       </Routes>
     </BrowserRouter>
   );

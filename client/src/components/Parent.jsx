@@ -5,6 +5,7 @@ import { Box ,Button} from "@mui/material";
 
 const Parent = () => {
     const[open,setOpen]=useState(true);
+    const[confirm,setconfirm]=useState(false)
 
     const dialogData={
         title:{
@@ -19,12 +20,32 @@ const Parent = () => {
 
         
     };
+
+    const confirmData={
+      title:{"confirm Action":""},
+      message:"Do you really want to delete this item?",
+      close:true,
+    };
   return (
 
     <Box>
 
     <GlobalDialog open={open} setOpen={setOpen} data={dialogData} />
+
+    <Button variant='outlined' color='black' sx={{ml:4}} onClick={()=>setconfirm(true)}>Show confir Dialog</Button>
+<GlobalDialog 
+open={confirm}
+setOpen={setconfirm}
+data={confirmData}
+type="confirm"
+  confirmBtnText="Yes"    // default works too
+  cancelBtnText="No" 
+onConfirm={()=>console.log("Yes clicked")}
+onCancel={()=>console.log("No clicked")}
+/>
+
   </Box>
+
   )
 
 }
