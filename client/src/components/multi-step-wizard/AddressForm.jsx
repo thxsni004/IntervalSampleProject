@@ -33,9 +33,9 @@ const AddressForm = ({next,back}) => {
 <Form>
 
 <Box sx={{display:'flex' ,
- p:4 ,
+ p:{xs:2, sm:2.5 , md:4} ,
 flexDirection:'column',
- gap:2,
+ gap:{xs:2 , sm:2.5 , md:3},
 width:{xs:'100%' ,sm:400}
     
     }}>

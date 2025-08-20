@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { submitForm } from '../../redux/features/formSlice';
-import { CardContent, Typography ,Box,Card, Button, Snackbar } from '@mui/material';
+import { CardContent, Typography ,Box,Card, Button, Snackbar ,Alert } from '@mui/material';
 
 const Summary = ({back}) => {
     const{personalInfo,address}=useSelector((state)=>state.form)
@@ -54,12 +54,39 @@ const Summary = ({back}) => {
 <Button onClick={handleSubmit} variant='contained' sx={{bgcolor:'purple'}} >Submit</Button>
     </Box>
 
-    <Snackbar
+    {/* <Snackbar
     open={open}
     autoHideDuration={3000}
     message='Form submitted successfully'
     onClose={()=>setOpen(false)}
-    />
+    /> */}
+     <Snackbar
+      open={open}
+      autoHideDuration={3000}
+      onClose={()=>setOpen(false)}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+    >
+      <Alert 
+        onClose={() => setOpen(false)} 
+        severity="success" 
+        variant="filled"
+        sx={{ 
+          width: '100%', 
+          color: 'green', 
+          bgcolor: 'white', 
+          fontWeight: 'bold',
+          fontFamily: 'times new roman',
+          borderRadius:4,
+        }}
+      >
+         Form Submitted Successfully!
+      </Alert>
+    </Snackbar>
+    
+
+   
+
+      
 
 </Box>
   )

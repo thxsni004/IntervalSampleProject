@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import PersonalInfoForm from '../components/multi-step-wizard/PersonalInfoForm'
 import AddressForm from '../components/multi-step-wizard/AddressForm'
 import Summary from '../components/multi-step-wizard/Summary'
+import FormStepper from "../components/multi-step-wizard/FormStepper";
+
+
 
 const MultiStepForm = () => {
 
@@ -18,6 +21,7 @@ const MultiStepForm = () => {
       minHeight:'80vh'
 
     }}>
+            <FormStepper step={step} />
     {step ===1 &&   <PersonalInfoForm next={()=> setStep(2)} /> }
   
    {step ===2  &&  <AddressForm next={()=>setStep(3)} back={()=>setStep(1)} />}
