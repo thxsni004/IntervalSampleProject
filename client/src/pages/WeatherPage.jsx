@@ -40,33 +40,7 @@ const WeatherPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box display="flex">
-      <Sidebar
-        mobileOpen={sidebarOpen}
-        handleDrawerToggle={() => dispatch(toggleSidebar())}
-      />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: "100%",
-        }}
-      >
-        {isMobile && (
-          <IconButton
-            onClick={() => dispatch(toggleSidebar())}
-            sx={{
-              position: "fixed",
-              top: 10,
-              left: 10,
-              zIndex: theme.zIndex.drawer + 1,
-              color: "black",
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
+   
 
         <Container maxWidth="sm" sx={{ mt: 5 }}>
           <Box sx={{ justifyContent: "center", alignItems: "center" }}>
@@ -122,9 +96,7 @@ const WeatherPage = () => {
             </Box>
           </Box>
         </Container>
-      </Box>
-
-    </Box>
+ 
     
   );
 };

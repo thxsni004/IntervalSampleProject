@@ -164,39 +164,7 @@ function UserDetails() {
   const departments = [...new Set(rows.map((r) => r.Department))];
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar
-        mobileOpen={sidebarOpen}
-        handleDrawerToggle={() => dispatch(toggleSidebar())}
-      />
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-
-          p: isSmallMobile ? 1 : 3,
-          width: "100%",
-          transition: theme.transitions.create("margin", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          }),
-        }}
-      >
-        {isMobile && (
-          <IconButton
-            onClick={() => dispatch(toggleSidebar())}
-            sx={{
-              position: "fixed",
-              top: 10,
-              left: 10,
-              zIndex: theme.zIndex.drawer + 1,
-              color: "black",
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
 
         <Box
           sx={{
@@ -331,8 +299,7 @@ function UserDetails() {
                 },
               }}
             />
-          </Box>
-        </Box>
+      
 
         {/* ✏️ Edit Dialog */}
         <Dialog

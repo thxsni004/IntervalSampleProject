@@ -85,39 +85,7 @@ function FormikMaterialForm() {
   }, [openDialog]);
 
   return (
-    <Box display="flex">
-      <Sidebar
-        mobileOpen={sidebarOpen}
-        handleDrawerToggle={() => dispatch(toggleSidebar())}
-      />
-
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: isSmallMobile ? 1 : 1,
-          width: "100%",
-          transition: theme.transitions.create("margin", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          }),
-          // marginLeft: sidebarOpen && !isMobile ? "240px" : 0,
-        }}
-      >
-        {isMobile && (
-          <IconButton
-            onClick={() => dispatch(toggleSidebar())}
-            sx={{
-              position: "fixed",
-              top: 10,
-              left: 10,
-              zIndex: theme.zIndex.drawer + 1,
-              color: "black",
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
+   
 
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Formik
@@ -364,8 +332,7 @@ function FormikMaterialForm() {
             </DialogActions>
           </Dialog>
         </LocalizationProvider>
-      </Box>
-    </Box>
+
   );
 }
 

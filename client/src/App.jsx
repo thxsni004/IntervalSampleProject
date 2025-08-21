@@ -19,31 +19,39 @@ import Purchased from './pages/Purchased';
 import Parent from './components/Parent';
 import ReactWindow from './pages/ReactWindow';
 import MultiStepForm from './pages/MultiStepForm';
+import CountryDropdown from './pages/CountryDropdown';
+import Layout from "./components/Layout";
+
 
 function App() {
   const user = useSelector((state) => state.auth.user);
 
   
   return (
+ 
     <BrowserRouter>
+   
       <Routes>
+        
+
         <Route path="/" element={<Navigate to="/register" />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-    <Route path="/dashboard" element={ <ProtectedRoute><Dashboard /></ProtectedRoute>} />
-<Route path="/user-details" element={<UserDetails/>} />
-<Route path='/form' element={<Form/>}/>
-<Route path='/weather' element={<WeatherPage/>}/>
+    <Route path="/dashboard" element={ <ProtectedRoute><Layout> <Dashboard /></Layout></ProtectedRoute>} />
+<Route path="/user-details" element={<Layout><UserDetails/></Layout>} />
+<Route path='/form' element={<Layout><Form/></Layout>}/>
+<Route path='/weather' element={<Layout><WeatherPage/></Layout>}/>
 
-<Route path='/upload' element={<FileUpload/>}/>
-<Route path='/slot' element={<Dynamic/>}/>
-<Route path='/drag' element={<DragDrop/>} />
-<Route path='/product' element={<ProductCart/>}/>
-<Route path='/cartpage' element={<CartPage/>}/>
-<Route path="/purchased" element={<Purchased />} />
-<Route path="/parent" element={<Parent />} />
-<Route path="/react" element={<ReactWindow />} />
-<Route path='multi' element={<MultiStepForm/>}/>
+<Route path='/upload' element={<Layout><FileUpload/></Layout>}/>
+<Route path='/slot' element={<Layout><Dynamic/></Layout>}/>
+<Route path='/drag' element={<Layout><DragDrop/></Layout>} />
+<Route path='/product' element={<Layout><ProductCart/></Layout>}/>
+<Route path='/cartpage' element={<Layout><CartPage/></Layout>}/>
+<Route path="/purchased" element={<Layout><Purchased /></Layout>} />
+<Route path="/parent" element={<Layout><Parent /></Layout>} />
+<Route path="/react" element={<Layout><ReactWindow /></Layout>} />
+<Route path='multi' element={<Layout><MultiStepForm/></Layout>}/>
+<Route path='/country' element={<Layout><CountryDropdown /></Layout>}  />
       </Routes>
     </BrowserRouter>
   );

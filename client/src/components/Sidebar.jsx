@@ -28,6 +28,7 @@ import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
   FileUpload,
+ Language as LanguageIcon
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/features/AuthSlice";
@@ -67,9 +68,10 @@ function Sidebar({ mobileOpen, handleDrawerToggle }) {
       text: "User Details",
       path: "/user-details",
     },
-    {icon:<InventoryIcon/>, text:"Referral", path:"/slot"}
+    {icon:<InventoryIcon/>, text:"Referral", path:"/slot"},
    
-    //  {icon: <UploadIcon/>,text:"file Upload",path:"/upload",}
+     {icon: <CategoryIcon/>,text:"Multi-Step-Wizard",path:"/multi",},
+          {icon: <LanguageIcon/>,text:"Contry",path:"/country",},
   ];
 
   const SidebarContent = (

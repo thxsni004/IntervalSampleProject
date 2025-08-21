@@ -8,6 +8,7 @@ import weatherReducer from "./features/watherSlice";
 import uploadReducer from "./features/UploadSlice"
 import dragDropReducer from './features/dragDropSlice'
 import cartReducer from './features/CartSlice'
+import locationReducer from './features/locationSlice'
 
 
 export const store = configureStore({
@@ -21,6 +22,8 @@ export const store = configureStore({
       upload: uploadReducer,
       dragDrop:dragDropReducer,
       cart:cartReducer,
+      location:locationReducer
+
       
  
   },

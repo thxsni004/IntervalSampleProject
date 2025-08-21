@@ -70,48 +70,10 @@ const ProductCart = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
-        <Box display="flex" minHeight="100vh" sx={{ backgroundColor: '#e7ddee' }}>
-            <Sidebar
-                mobileOpen={sidebarOpen}
-                handleDrawerToggle={() => dispatch(toggleSidebar())}
-            />
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    p: isMobile ? 1 : 3,
-                    width: '100%',
-                    position: 'relative',
-                    backgroundColor: '#e7ddee',
-                    // marginLeft: isMobile ? 0 : sidebarOpen ? '240px' : '0',
-                    transition: theme.transitions.create('margin', {
-                        easing: theme.transitions.easing.sharp,
-                        duration: theme.transitions.duration.leavingScreen,
-                    }),
-                }}
-            >
-                {isMobile && (
-                    <IconButton
-                        onClick={() => dispatch(toggleSidebar())}
-                        sx={{
-                            position: 'fixed',
-                            top: 10,
-                            left: 10,
-                            zIndex: theme.zIndex.drawer + 1,
-                            color: 'black',
-                            // backgroundColor: 'rgba(255,255,255,0.7)',
-                            '&:hover': {
-                                backgroundColor: 'rgba(255,255,255,0.9)',
-                            }
-                        }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                )}
+       <Box>
                 <Header title="Accessories" />
                 <ProductList />
-            </Box>
-        </Box>
+       </Box>
     )
 }
 

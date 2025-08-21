@@ -47,35 +47,7 @@ const DragDrop = () => {
 
   
   return (
-    <Box display="flex" minHeight="100vh">
-      <Sidebar
-        mobileOpen={sidebarOpen}
-        handleDrawerToggle={() => dispatch(toggleSidebar())}
-      />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: '100%',
-          position: 'relative',
-        }}
-      >
-        {isMobile && (
-          <IconButton
-            onClick={() => dispatch(toggleSidebar())}
-            sx={{
-              position: 'fixed',
-              top: 10,
-              left: 10,
-              zIndex: theme.zIndex.drawer + 1,
-              color: 'black',
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
-
+   <Box>
         <Typography
           variant="h4"
           fontWeight="bold"
@@ -169,8 +141,8 @@ const DragDrop = () => {
             ))}
           </Box>
         </DragDropContext>
-      </Box>
-    </Box>
+     </Box>
+    
   );
 };
 

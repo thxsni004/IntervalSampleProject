@@ -23,34 +23,10 @@ function Dashboard() {
 
   const [open, setOpen] = useState(false);
   return (
-    <Box sx={{ display: "flex" }}>
-      <Sidebar
-        mobileOpen={sidebarOpen}
-        handleDrawerToggle={handleDrawerToggle}
-      />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 2,
-          ml: { sm: 0 },
-        }}
-      >
-        {isMobile && (
-          <IconButton onClick={handleDrawerToggle} sx={{ mb: 2 }}>
-            <MenuIcon />
-          </IconButton>
-        )}
+
         <BusinessDash />
-        {/* <SummarySection /> */}
-      </Box>
-         {/* <>
-      <Button variant="contained" onClick={() => setOpen(true)}>
-        Open Dialog
-      </Button>
-      <ShiftDialog open={open} onClose={() => setOpen(false)} />
-    </> */}
-    </Box>
+      
+
   );
 }
 
