@@ -1,57 +1,3 @@
-// import React from "react";
-// import Box from "@mui/material/Box";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import Select from "@mui/material/Select";
-// import { useSelector, useDispatch } from "react-redux";
-// import {
-//   setSelectedState,
-//   fetchCities,
-// } from "../../redux/features/locationSlice";
-// import { CircularProgress } from "@mui/material";
-
-// const StateDropdown = () => {
-//   const dispatch = useDispatch();
-//   const { states, selectedState, selectedCountry, loading } = useSelector(
-//     (state) => state.location
-//   );
-
-//   const handleChange = (e) => {
-//     const state = e.target.value;
-//     dispatch(setSelectedState(state));
-//     if (state) dispatch(fetchCities({ country: selectedCountry, state }));
-//   };
-
-//   return (
-//     <Box sx={{ minWidth: 120 }}>
-//       <FormControl fullWidth margin="normal" disabled={!selectedCountry}>
-//         <InputLabel>State</InputLabel>
-//         {loading ? (
-//           <CircularProgress size={24} />
-//         ) : (
-//           <Select value={selectedState} onChange={handleChange}>
-//             {states.length >0 ?(
-//                 states.map((s,i)=>(
-//          <MenuItem key={i} value={s}>
-//             {s}
-         
-//          </MenuItem>
-
-//                 ))
-//             ) :(
-//                 <MenuItem disabled >No States Found</MenuItem>
-//             )}
-
-//           </Select>
-//         )}
-//       </FormControl>
-//     </Box>
-//   );
-// };
-
-// export default StateDropdown;
-
 import React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -113,13 +59,13 @@ const StateDropdown = () => {
             State
           </Box>
         </InputLabel>
-        {loading ? (
+        {!selectedState && loading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
             <CircularProgress size={28} />
           </Box>
         ) : (
           <Select 
-            value={selectedState} 
+            value={selectedState }  
             onChange={handleChange}
             label={
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -128,6 +74,7 @@ const StateDropdown = () => {
               </Box>
             }
           >
+            
             {states.length > 0 ? (
               states.map((s,i) => (
                 <MenuItem 

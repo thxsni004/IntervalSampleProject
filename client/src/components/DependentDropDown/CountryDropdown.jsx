@@ -67,11 +67,11 @@ const CountryDropdown = () => {
             Country
           </Box>
         </InputLabel>
-        {loading ? (
+        {/* {loading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
             <CircularProgress size={28} />
           </Box>
-        ) : (
+        ) : ( */}
           <Select 
             value={selectedCountry} 
             onChange={handleChange}
@@ -97,7 +97,7 @@ const CountryDropdown = () => {
               </MenuItem>
             ))}
           </Select>
-        )}
+        {/* )} */}
       </FormControl>
     </Box>
   );
